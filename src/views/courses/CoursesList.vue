@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1>Courses List</h1>
+    <p><router-link :to="{name: 'courseCreate'}">Create a Course</router-link></p>
+    <br>
     <ul>
       <li v-for="course in courses" :key="course.id">
         <router-link :to="{name: 'courseDetails', params: { id: course.id }}">{{ course.title }}</router-link>
