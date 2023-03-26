@@ -13,6 +13,26 @@
         </router-link>
       </li>
     </ul>
+
+    <!-- Pagination -->
+    <div>
+      <nav aria-label="...">
+        <ul class="pagination">
+          <li v-for="pagination_link in pagination_links"
+          :key="'pagination_link-' + pagination_link.label"
+          class="page-item"
+          :class="{
+            disabled: pagination_link.url == null,
+            active: pagination_link.active
+          }">
+            <a class="page-link"
+            @click="changePage(pagination_link.url)"
+            v-html="pagination_link.label"
+            style="cursor: pointer;"></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </template>
 
@@ -20,7 +40,8 @@
 export default {
   data() {
     return {
-      courses: []
+      courses: [],
+      pagination_links: [],
     }
   },
 
@@ -28,11 +49,26 @@ export default {
     this.getCourses();
   },
 
+  computed: {
+    page() {
+      return this.$route.query.page || 1;
+    }
+  },
+
+  watch: {
+    page() {
+      this.getCourses();
+    }
+  },
+
   methods: {
     getCourses() {
-      this.axios.get('http://laravel-study-vue-api-backend.test/api/courses')
+      this.axios.get('http://laravel-study-vue-api-backend.test/api/courses?per_page=10' + '&page=' + this.page)
         .then(response => {
-          this.courses = response.data;
+          let res = response.data;
+          console.log(res);
+          this.courses = res.data;
+          this.pagination_links = res.links;
         })
         .catch(error => {
           console.log(error);
@@ -48,6 +84,15 @@ export default {
           console.log(error);
         });
     },
+    changePage(url) {
+      if (url) {
+        this.$router.replace({
+          query: {
+            page: url.split('page=')[1]
+          }
+        })
+      }
+    }
   },
 }
 </script>
