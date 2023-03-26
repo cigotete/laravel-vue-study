@@ -7,6 +7,11 @@
     <div v-if="course.category">
       Category: {{ course.category.name }}
     </div>
+    <p>
+      <router-link :to="{name: 'courseEdit', params: { id: course.id}}">
+        Edit Course
+      </router-link>
+    </p>
 
   </div>
 </template>

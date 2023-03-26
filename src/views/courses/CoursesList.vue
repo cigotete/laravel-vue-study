@@ -7,6 +7,10 @@
       <li v-for="course in courses" :key="course.id">
         <router-link :to="{name: 'courseDetails', params: { id: course.id }}">{{ course.title }}</router-link>
         <button @click="deleteCourse(course.id)">Delete</button>
+        &nbsp;
+        <router-link :to="{name: 'courseEdit', params: { id: course.id}}">
+          <button>Edit</button>
+        </router-link>
       </li>
     </ul>
   </div>
