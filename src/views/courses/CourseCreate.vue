@@ -1,6 +1,17 @@
 <template>
   <h1>Create a Course</h1>
   <div>
+    <!--
+    <div v-if="errors">
+        <div v-for="(messages, field) in errors" :key="field">
+            <span v-for="(message, index) in messages" :key="index">{{ message }}</span>
+        </div>
+    </div>
+    -->
+    <div v-if="errors">
+      <div v-for="(error, index) in errors" :key="index">{{ error }}</div>
+    </div>
+
     <form @submit.prevent="saveCourse">
       <div>
         <label for="title">Course Title</label>
@@ -42,7 +53,8 @@ export default {
         title: '',
         description: '',
         category_id: '',
-      }
+      },
+      errors: [],
     }
   },
 
@@ -69,9 +81,11 @@ export default {
             category_id: '',
           };
           console.log(response);
+          this.errors = [];
         })
         .catch(error => {
-          console.log(error);
+          //this.errors = error.response.data.errors; // Commented html related
+          this.errors = Object.values(error.response.data.errors).flat();
         });
     },
   },
