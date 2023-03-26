@@ -3,13 +3,13 @@
     <h1>Courses List</h1>
     <p><router-link :to="{name: 'courseCreate'}">Create a Course</router-link></p>
     <br>
-    <ul>
-      <li v-for="course in courses" :key="course.id">
+    <ul style="list-style: none;">
+      <li style="text-align: left;" v-for="course in courses" :key="course.id">
         <router-link :to="{name: 'courseDetails', params: { id: course.id }}">{{ course.title }}</router-link>
-        <button @click="deleteCourse(course.id)">Delete</button>
+        <button @click="deleteCourse(course.id)" class="btn btn-danger btn-sm">Delete</button>
         &nbsp;
         <router-link :to="{name: 'courseEdit', params: { id: course.id}}">
-          <button>Edit</button>
+          <button class="btn btn-primary btn-sm">Edit</button>
         </router-link>
       </li>
     </ul>
