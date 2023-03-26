@@ -6,6 +6,7 @@
     <ul>
       <li v-for="course in courses" :key="course.id">
         <router-link :to="{name: 'courseDetails', params: { id: course.id }}">{{ course.title }}</router-link>
+        <button @click="deleteCourse(course.id)">Delete</button>
       </li>
     </ul>
   </div>
@@ -28,6 +29,16 @@ export default {
       this.axios.get('http://laravel-study-vue-api-backend.test/api/courses')
         .then(response => {
           this.courses = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    deleteCourse(id) {
+      this.axios.delete('http://laravel-study-vue-api-backend.test/api/courses/' + id)
+        .then(() => {
+          this.getCourses();
+          //this.courses = this.courses.filter(course => course.id !== id);
         })
         .catch(error => {
           console.log(error);
