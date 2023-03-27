@@ -3,6 +3,13 @@
     <h1>Courses List</h1>
     <p><router-link :to="{name: 'courseCreate'}">Create a Course</router-link></p>
     <br>
+
+    <div class="card mb-4">
+      <h2>Search</h2>
+
+      <input v-model="search" type="text" id="" placeholder="Type term to search">
+    </div>
+
     <div class="card mb-4 pt-4">
     <ul style="list-style: none;">
       <li style="text-align: left;" v-for="course in courses" :key="course.id">
@@ -43,7 +50,8 @@ export default {
   data() {
     return {
       courses: [],
-      pagination: {}
+      pagination: {},
+      search: ''
     }
   },
 
@@ -69,12 +77,23 @@ export default {
   watch: {
     page() {
       this.getCourses();
+    },
+    search() {
+      this.getCourses();
     }
   },
 
   methods: {
     getCourses() {
-      this.axios.get('http://laravel-study-vue-api-backend.test/api/courses?per_page=10' + '&page=' + this.page)
+      let api_url = 'http://laravel-study-vue-api-backend.test/api/courses';
+      this.axios.get(api_url, {
+        params: {
+          sort: '-id',
+          per_page: 10,
+          page: this.page,
+          'filter[title]': this.search
+        }
+      })
         .then(response => {
           let res = response.data;
           console.log(res);
