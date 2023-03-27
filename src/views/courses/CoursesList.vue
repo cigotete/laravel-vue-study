@@ -18,7 +18,7 @@
     <div>
       <nav aria-label="...">
         <ul class="pagination">
-          <li v-for="pagination_link in pagination_links"
+          <li v-for="pagination_link in pagination.links"
           :key="'pagination_link-' + pagination_link.label"
           class="page-item"
           :class="{
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       courses: [],
-      pagination_links: [],
+      pagination: {}
     }
   },
 
@@ -51,7 +51,16 @@ export default {
 
   computed: {
     page() {
-      return this.$route.query.page || 1;
+      let page = this.$route.query.page || 1;
+      if (page > this.pagination.last_page) {
+        this.$router.replace({
+          query: {
+            page: this.pagination.last_page
+          }
+        });
+        return this.pagination.last_page;
+      }
+      return page;
     }
   },
 
@@ -68,7 +77,10 @@ export default {
           let res = response.data;
           console.log(res);
           this.courses = res.data;
-          this.pagination_links = res.links;
+          this.pagination = {
+            links: res.links,
+            last_page: res.last_page
+          }
         })
         .catch(error => {
           console.log(error);
