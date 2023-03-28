@@ -58,6 +58,8 @@ export default {
           localStorage.setItem('auth', JSON.stringify(response.data));
           this.setAuth(response.data);
           this.disabled = false;
+
+          this.$router.push({ name: 'dashboard' });
         })
         .catch(error => {
           console.log(error);
