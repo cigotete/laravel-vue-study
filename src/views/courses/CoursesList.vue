@@ -90,7 +90,7 @@ export default {
 
   methods: {
     getCourses() {
-      let api_url = 'http://laravel-study-vue-api-backend.test/api/courses';
+      let api_url = '/api/courses';
       this.axios.get(api_url, {
         params: {
           sort: '-id',
@@ -116,7 +116,7 @@ export default {
         });
     },
     deleteCourse(id) {
-      this.axios.delete('http://laravel-study-vue-api-backend.test/api/courses/' + id)
+      this.axios.delete('/api/courses/' + id)
         .then(() => {
           this.getCourses();
           //this.courses = this.courses.filter(course => course.id !== id);

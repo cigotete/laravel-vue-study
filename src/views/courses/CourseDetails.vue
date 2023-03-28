@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     getCourse() {
-      this.axios.get('http://laravel-study-vue-api-backend.test/api/courses/' + this.$route.params.id + '?included=category')
+      this.axios.get('/api/courses/' + this.$route.params.id + '?included=category')
         .then(response => {
           this.course = response.data;
         })

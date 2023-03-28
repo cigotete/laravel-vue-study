@@ -64,7 +64,7 @@ export default {
 
   methods: {
     getCategories() {
-      this.axios.get('http://laravel-study-vue-api-backend.test/api/categories')
+      this.axios.get('/api/categories')
         .then(response => {
           this.categories = response.data;
         })
@@ -73,7 +73,7 @@ export default {
         });
     },
     saveCourse() {
-      this.axios.post('http://laravel-study-vue-api-backend.test/api/courses', this.course)
+      this.axios.post('/api/courses', this.course)
         .then(response => {
           this.course = {
             title: '',
