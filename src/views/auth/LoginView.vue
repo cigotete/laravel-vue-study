@@ -2,6 +2,7 @@
   <div class="container">
 
     <h1>Login</h1>
+    {{ auth }}
 
     <div class="card mx-auto">
       <div class="card-body">
@@ -25,6 +26,9 @@
 </template>
 
 <script>
+
+import { mapMutations, mapState } from 'vuex';
+
 export default {
   data() {
     return {
@@ -33,7 +37,13 @@ export default {
       disabled: false,
     }
   },
+
+  computed: {
+    ...mapState(['auth']),
+  },
+
   methods: {
+    ...mapMutations(['setAuth']),
     login() {
       this.disabled = true;
       this.axios.post('/api/login', {
@@ -45,6 +55,7 @@ export default {
       })
         .then(response => {
           console.log(response.data);
+          this.setAuth(response.data);
           this.disabled = false;
         })
         .catch(error => {
