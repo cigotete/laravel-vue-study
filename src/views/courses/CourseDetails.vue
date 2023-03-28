@@ -8,7 +8,7 @@
       Category: {{ course.category.name }}
     </div>
     <p>
-      <router-link :to="{name: 'courseEdit', params: { id: course.id}}">
+      <router-link :to="{name: 'courseEdit'}">
         Edit Course
       </router-link>
     </p>
