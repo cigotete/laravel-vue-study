@@ -2,11 +2,13 @@
 import CoursesList from './views/courses/CoursesList.vue';
 
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link :to="{name: 'coursesList'}">Courses</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <div class="container">
+    <nav class="navigation">
+      <router-link to="/">Home</router-link> |
+      <router-link :to="{name: 'coursesList'}">Courses</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+  </div>
   <router-view/>
 </template>
 
@@ -19,16 +21,16 @@ import CoursesList from './views/courses/CoursesList.vue';
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+.navigation {
+  padding: 10px;
 }
 
-nav a {
+.navigation a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-nav a.router-link-exact-active {
+.navigation a.router-link-exact-active {
   color: #42b983;
 }
 </style>
