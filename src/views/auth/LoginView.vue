@@ -55,6 +55,7 @@ export default {
       })
         .then(response => {
           console.log(response.data);
+          localStorage.setItem('auth', JSON.stringify(response.data));
           this.setAuth(response.data);
           this.disabled = false;
         })
