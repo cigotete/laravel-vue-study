@@ -19,6 +19,25 @@ import CoursesList from './views/courses/CoursesList.vue';
   <router-view/>
 </template>
 
+<script>
+
+import { mapActions } from 'vuex';
+
+export default {
+
+  created() {
+    this.setAuth();
+  },
+
+  methods: {
+    ...mapActions([
+      'setAuth'
+    ]),
+  },
+}
+
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
