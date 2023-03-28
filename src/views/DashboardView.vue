@@ -1,10 +1,16 @@
 <template>
-  <h1>Dashboard</h1>
+  <div v-if="auth" class="container">
+    <h1>Welcome {{ auth.user.name }}</h1>
+  </div>
 </template>
 
 <script>
-export default {
+import { mapState } from 'vuex'
 
+export default {
+  computed: {
+    ...mapState(['auth']),
+  }
 }
 </script>
 
