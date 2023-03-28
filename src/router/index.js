@@ -6,6 +6,7 @@ import CourseCreateView from '../views/courses/CourseCreate.vue'
 import CourseEditView from '../views/courses/CourseEdit.vue'
 import LoginView from '../views/auth/LoginView.vue'
 import RegisterView from '../views/auth/RegisterView.vue'
+import DashboardView from '../views/DashboardView.vue'
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: DashboardView
   },
   {
     path: '/login',

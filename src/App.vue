@@ -6,7 +6,8 @@ import CoursesList from './views/courses/CoursesList.vue';
     <nav class="navigation">
       <router-link to="/">Home</router-link> |
       <router-link :to="{name: 'coursesList'}">Courses</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link :to="{name: 'dashboard'}">Dashboard</router-link>
     </nav>
   </div>
 
