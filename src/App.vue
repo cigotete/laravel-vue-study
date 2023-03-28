@@ -9,6 +9,13 @@ import CoursesList from './views/courses/CoursesList.vue';
       <router-link to="/about">About</router-link>
     </nav>
   </div>
+
+  <div>
+    <nav class="navigation">
+      <router-link :to="{name: 'login'}">Login</router-link> |
+      <router-link :to="{name: 'register'}">Register</router-link>
+    </nav>
+  </div>
   <router-view/>
 </template>
 
