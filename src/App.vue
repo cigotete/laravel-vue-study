@@ -11,7 +11,13 @@ import CoursesList from './views/courses/CoursesList.vue';
     </nav>
   </div>
 
-  <div>
+  <div v-if="auth" class="mb-3 mt-3">
+    <button class="btn btn-danger">
+      Close session
+    </button>
+  </div>
+
+  <div v-else>
     <nav class="navigation">
       <router-link :to="{name: 'login'}">Login</router-link> |
       <router-link :to="{name: 'register'}">Register</router-link>
@@ -22,12 +28,16 @@ import CoursesList from './views/courses/CoursesList.vue';
 
 <script>
 
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
 
   created() {
     this.setAuth();
+  },
+
+  computed: {
+    ...mapState(['auth']),
   },
 
   methods: {
