@@ -12,7 +12,7 @@ import CoursesList from './views/courses/CoursesList.vue';
   </div>
 
   <div v-if="auth" class="mb-3 mt-3">
-    <button class="btn btn-danger">
+    <button @click="logout" class="btn btn-danger">
       Close session
     </button>
   </div>
@@ -42,7 +42,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'setAuth'
+      'setAuth',
+      'logout'
     ]),
   },
 }
