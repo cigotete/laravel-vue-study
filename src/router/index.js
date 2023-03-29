@@ -50,7 +50,14 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: LoginView
+    component: LoginView,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('auth')) {
+        next('/dashboard');
+      } else {
+        next();
+      }
+    }
   },
   {
     path: '/register',
