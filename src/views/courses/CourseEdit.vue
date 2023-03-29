@@ -48,7 +48,7 @@ export default {
 
   methods: {
     getCategories() {
-      this.axios.get('/api/categories')
+      this.axios.get('/categories')
         .then(response => {
           this.categories = response.data;
         })
@@ -57,7 +57,7 @@ export default {
         });
     },
     getCourse() {
-      this.axios.get('/api/courses/' + this.$route.params.id)
+      this.axios.get('/courses/' + this.$route.params.id)
         .then(response => {
           this.course = response.data;
         })
@@ -66,7 +66,7 @@ export default {
         });
     },
     updateCourse() {
-      this.axios.put('/api/courses/' + this.$route.params.id, this.course)
+      this.axios.put('/courses/' + this.$route.params.id, this.course)
         .then(() => {
           this.$router.push({name: 'courseDetails', params: {id: this.$route.params.id}});
         })

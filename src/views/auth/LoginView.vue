@@ -46,7 +46,7 @@ export default {
     ...mapMutations(['setAuth']),
     login() {
       this.disabled = true;
-      this.axios.post('/api/login', {
+      this.axios.post('/login', {
         grand_type: 'password',
         client_id: '98ca60fd-34df-478f-95f6-6b7bf06ccbbb',
         client_secret: 'L0E3XkUpZ5CYVbmqaiU9OKHHTB0m0zIPOnNbke88',
