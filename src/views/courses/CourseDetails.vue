@@ -7,6 +7,9 @@
     <div v-if="course.category">
       Category: {{ course.category.name }}
     </div>
+    <div v-if="course.user">
+      User: {{ course.user.name }}
+    </div>
     <p>
       <router-link :to="{name: 'courseEdit'}">
         Edit Course
@@ -28,7 +31,7 @@ export default {
   },
   methods: {
     getCourse() {
-      this.axios.get('/courses/' + this.$route.params.id + '?included=category')
+      this.axios.get('/courses/' + this.$route.params.id + '?included=category,user')
         .then(response => {
           this.course = response.data;
         })
