@@ -1,6 +1,3 @@
-
-import CoursesList from './views/courses/CoursesList.vue';
-
 <template>
   <div class="container">
     <nav class="navigation">
