@@ -40,6 +40,14 @@ export default {
     ...mapState(['auth']),
   },
 
+  watch: {
+    auth(newValue) {
+      if (newValue) {
+        this.axios.defaults.headers.common['Authorization'] = 'Bearer ' + newValue.token.access_token;
+      }
+    }
+  },
+
   methods: {
     ...mapActions([
       'setAuth',
