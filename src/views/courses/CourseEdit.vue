@@ -1,6 +1,6 @@
 <template>
   <h1>Edit a Course</h1>
-  <div>
+  <div v-if="this.user.id == this.auth.user.id">
     <form @submit.prevent="updateCourse">
       <div>
         <label for="title">Course Title</label>
