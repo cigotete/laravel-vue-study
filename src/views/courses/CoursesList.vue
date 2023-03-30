@@ -14,9 +14,9 @@
     <ul style="list-style: none;">
       <li style="text-align: left;" v-for="course in courses" :key="course.id">
         <router-link :to="{name: 'courseDetails', params: { id: course.id }}">{{ course.title }}</router-link>
-        <button v-if="auth" @click="deleteCourse(course.id)" class="btn btn-danger btn-sm">Delete</button>
+        <button v-if="auth && course.user.id == auth.user.id" @click="deleteCourse(course.id)" class="btn btn-danger btn-sm">Delete</button>
         &nbsp;
-        <router-link v-if="auth" :to="{name: 'courseEdit', params: { id: course.id}}">
+        <router-link v-if="auth && course.user.id == auth.user.id" :to="{name: 'courseEdit', params: { id: course.id}}">
           <button class="btn btn-primary btn-sm">Edit</button>
         </router-link>
       </li>
@@ -99,6 +99,7 @@ export default {
       let api_url = '/courses';
       this.axios.get(api_url, {
         params: {
+          included: 'user',
           sort: '-id',
           per_page: 10,
           page: this.page,

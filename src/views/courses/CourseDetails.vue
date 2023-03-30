@@ -11,7 +11,7 @@
       User: {{ course.user.name }}
     </div>
     <p>
-      <router-link :to="{name: 'courseEdit'}">
+      <router-link v-if="auth && course.user.id == auth.user.id" :to="{name: 'courseEdit'}">
         Edit Course
       </router-link>
     </p>
@@ -20,11 +20,17 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
       course: {}
     }
+  },
+  computed: {
+    ...mapState(['auth'])
   },
   created() {
     this.getCourse();
