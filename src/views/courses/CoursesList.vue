@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Courses List</h1>
-    <p><router-link :to="{name: 'courseCreate'}">Create a Course</router-link></p>
+    <p v-if="auth"><router-link :to="{name: 'courseCreate'}">Create a Course</router-link></p>
     <br>
 
     <div class="card mb-4">
@@ -14,9 +14,9 @@
     <ul style="list-style: none;">
       <li style="text-align: left;" v-for="course in courses" :key="course.id">
         <router-link :to="{name: 'courseDetails', params: { id: course.id }}">{{ course.title }}</router-link>
-        <button @click="deleteCourse(course.id)" class="btn btn-danger btn-sm">Delete</button>
+        <button v-if="auth" @click="deleteCourse(course.id)" class="btn btn-danger btn-sm">Delete</button>
         &nbsp;
-        <router-link :to="{name: 'courseEdit', params: { id: course.id}}">
+        <router-link v-if="auth" :to="{name: 'courseEdit', params: { id: course.id}}">
           <button class="btn btn-primary btn-sm">Edit</button>
         </router-link>
       </li>
@@ -49,6 +49,8 @@
 
 import usePagination from '../../composables/usePagination.js';
 
+import { mapState } from 'vuex';
+
 export default {
 
   setup() {
@@ -73,6 +75,10 @@ export default {
       courses: [],
       search: ''
     }
+  },
+
+  computed: {
+    ...mapState(['auth'])
   },
 
   created() {
