@@ -33,12 +33,20 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
       categories: [],
-      course: {}
+      course: {},
+      user: {}
     }
+  },
+
+  computed: {
+    ...mapState(['auth'])
   },
 
   created() {
@@ -57,9 +65,14 @@ export default {
         });
     },
     getCourse() {
-      this.axios.get('/courses/' + this.$route.params.id)
+      this.axios.get('/courses/' + this.$route.params.id + '?included=category,user')
         .then(response => {
           this.course = response.data;
+          this.user = response.data.user;
+
+          if (this.user.id != this.auth.user.id) {
+            this.$router.push({name: 'coursesList'})
+          }
         })
         .catch(error => {
           console.log(error);
