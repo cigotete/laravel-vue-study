@@ -11,7 +11,7 @@
       User: {{ course.user.name }}
     </div>
     <p>
-      <router-link v-if="auth && course.user.id == auth.user.id" :to="{name: 'courseEdit'}">
+      <router-link v-if="auth && course.user_id == auth.user.id" :to="{name: 'courseEdit'}">
         Edit Course
       </router-link>
     </p>
