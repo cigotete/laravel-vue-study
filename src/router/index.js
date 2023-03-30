@@ -27,12 +27,18 @@ const routes = [
   {
     path: '/courses/:id(\\d+)/edit',
     name: 'courseEdit',
-    component: CourseEditView
+    component: CourseEditView,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/courses/create',
     name: 'courseCreate',
-    component: CourseCreateView
+    component: CourseCreateView,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/about',
