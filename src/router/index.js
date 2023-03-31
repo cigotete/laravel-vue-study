@@ -71,7 +71,14 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: RegisterView
+    component: RegisterView,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('auth')) {
+        next('/dashboard');
+      } else {
+        next();
+      }
+    }
   }
 ]
 
